@@ -1,12 +1,33 @@
-# React + Vite
+# Authentication App with React and Firebase
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This app is designed to authenticate users using **signup** and **login** functionality. After successful authentication, users are redirected to a **dashboard**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+This application is built using:
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React JS** for the frontend.
+- **Firebase Authentication** for user authentication (signup and login).
+- **Tailwind CSS** and **Daisy UI** for styling.
+
+### Key Features:
+
+- **Signup**: Users can create a new account using their email and password.
+- **Login**: Existing users can log in using their credentials.
+- **Dashboard**: After successful authentication, users are redirected to a protected dashboard.
+- **Protected Routes**: Unauthorized users cannot access the dashboard without logging in.
+- **Password Visibility Toggle**: Users can toggle password visibility during login and signup.
+
+---
+
+## Installation
+
+Follow these steps to set up the project locally:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+   ```
