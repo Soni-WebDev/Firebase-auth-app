@@ -2,23 +2,27 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { Link, useNavigate } from "react-router-dom";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
       console.log(auth, email, password);
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard"); 
+      navigate("/dashboard");
     } catch (error) {
-      
       console.error("Error signing up:", error.message);
-       let errorMessage = "An error occurred during signup."; // Default error message
+      let errorMessage = "An error occurred during signup."; // Default error message
 
       // Map Firebase error codes to custom messages
       switch (error.code) {
@@ -37,7 +41,7 @@ const Signup = () => {
 
       setMessage(errorMessage); // Set the custom error message
       setTimeout(() => {
-          setMessage('');
+        setMessage("");
       }, 2000);
     }
   };
@@ -59,13 +63,28 @@ const Signup = () => {
           </div>
           <div className="mb-6">
             <label className="block text-sm font-medium mb-2">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"} // Toggle input type
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3 py-2 border rounded-lg pr-10" // Add padding for the icon
+                required
+              />
+              {password && (
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-0 flex items-center px-3 focus:outline-none"
+                >
+                  {showPassword ? (
+                    <FaRegEyeSlash className="text-gray-500" />
+                  ) : (
+                    <FaRegEye className="text-gray-500" />
+                  )}
+                </button>
+              )}
+            </div>
           </div>
           <button
             type="submit"
@@ -76,7 +95,10 @@ const Signup = () => {
         </form>
         {message && <p className="text-red-600 mb-4">{message}</p>}
         <p className="mt-4 text-center">
-          Already have an account? <Link to='/login' className="text-blue-500">Login</Link>
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-500">
+            Login
+          </Link>
         </p>
       </div>
     </div>
